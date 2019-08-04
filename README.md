@@ -1,4 +1,4 @@
-# array_injector
+# Array_injector
 Task1: Inject new Key and value to the array.
 
 # Seven-segment display time calculation at max power
