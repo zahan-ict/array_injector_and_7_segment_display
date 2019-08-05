@@ -5,7 +5,7 @@
  *
  */
 
-function injectAfter(Obj,afterKey,newKey,newValue){
+function injectAfter(Obj, afterKey, newKey, newValue) {
 
     var bin = new Object();
     var newKey_obj = {};
@@ -13,11 +13,9 @@ function injectAfter(Obj,afterKey,newKey,newValue){
     var key;
 
     //If the afterKey  exist, then add new key/value on the correct position of the object
-    if(afterKey in Obj) {
-
+    if (afterKey in Obj) {
         //If the newKey already exists in the input array, then moved it to the correct position of the object
-        if(newKey in Obj){
-
+        if (newKey in Obj) {
             for (key in Obj) {
 
                 if (key === afterKey) {
@@ -26,42 +24,43 @@ function injectAfter(Obj,afterKey,newKey,newValue){
                 } else {
                     if (key === newKey) {
                         newKey_obj[key] = Obj[key];
+                    } else {
+
+                        end_obj[key] = Obj[key];
+
                     }
-                    end_obj[key] = Obj[key];
                 }
 
             }
             //If marge together newKey and rest of the element, then add to the object
-            newKey_obj = Object.assign(newKey_obj, end_obj)
-            for (newKey_obj in Obj) {
+            newKey_obj = Object.assign(newKey_obj, end_obj);
 
-                bin[newKey_obj] = Obj[newKey_obj];
+            for (var x in newKey_obj) {
+
+                bin[x] = newKey_obj[x];
             }
-           //console.log(bin);
-            reformat(bin); // print formatted output on HTML
 
+            //If the afterKey exists but newKey does not exist
+        } else {
 
-         //If the afterKey exists but newKey does not exist
-        }else{
+            for (key in Obj) {
 
-        for (key in Obj) {
+                bin[key] = Obj[key];
 
-            bin[key] = Obj[key];
-
-            if (key === afterKey) {
-                bin[newKey] = newValue;
+                if (key === afterKey) {
+                    bin[newKey] = newValue;
+                }
             }
 
         }
-       // console.log(bin);
-         reformat(bin); // print formatted output on HTML
+        console.log(bin);
+        reformat(bin); // print formatted output on HTML
 
-        }
     }
     //If the afterKey does not exist, then add new key/value at the end of the object
-    else{
+    else {
         //If the newKey exist  but  afterKey does not exist
-        if(newKey in Obj) {
+        if (newKey in Obj) {
             for (key in Obj) {
 
                 if (key === newKey) {
@@ -71,34 +70,22 @@ function injectAfter(Obj,afterKey,newKey,newValue){
 
                     end_obj[key] = Obj[key];
                 }
-
             }
 
             end_obj = Object.assign(end_obj, newKey_obj);
-
-            for (end_obj in Obj) {
-
-                bin[end_obj] = Obj[end_obj];
-
+            for (var i in end_obj) {
+                bin[i] = end_obj[i];
             }
-            //console.log(bin);
-            reformat(bin); // print formatted output on HTML
-
-        //If the afterKey and newKey does not exist
-        }else{
-
+            //If the afterKey and newKey does not exist
+        } else {
             for (key in Obj) {
 
                 bin[key] = Obj[key];
-                // console.log(bin[i]);
-                bin[newKey] = newValue;
-
             }
-
-            //console.log(bin);
-            reformat(bin); // print formatted output on HTML
-
+            bin[newKey] = newValue;
         }
+        console.log(bin);
+        reformat(bin); // print formatted output on HTML
 
     }
 
@@ -106,12 +93,12 @@ function injectAfter(Obj,afterKey,newKey,newValue){
 }
 
 //format the output for HTML
-function reformat(bin){
+function reformat(bin) {
     var key;
-    for(key in bin){
+    for (key in bin) {
 
-        document.getElementById("inject").innerHTML += key +" = "+ bin[key]+"<br>";
+        document.getElementById("inject").innerHTML += key + " = " + bin[key] + "<br>";
     }
 }
 
-injectAfter({foo: 3, bar: 1}, "foo", "baz", 42);
+injectAfter({foo: 3, bar: 1, baz: 42}, "foo", "baz", 42);

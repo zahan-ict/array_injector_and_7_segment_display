@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @author Md DI Sarwar zahan
  * @info:Inserts a new key/value into php array
@@ -77,9 +76,8 @@ function injectAfter(array $array, $afterKey, $newKey, $newValue)
         }else{
             foreach ($array as $key => $value) {
                 $bin[$key] = $value;
-
-                $bin[$newKey] = $newValue;
             }
+            $bin[$newKey] = $newValue;
 
         }
 
